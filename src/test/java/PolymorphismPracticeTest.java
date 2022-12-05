@@ -6,6 +6,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -113,7 +114,7 @@ class PolymorphismPracticeTest {
     }
 
     // Test 2
-    @DisplayName("Checks Pizza attributes and constructor")
+    @DisplayName("Checks Pizza and Durum attributes and constructor")
     @Test
     void pizzaClassTest() throws ClassNotFoundException, NoSuchMethodException, NoSuchFieldException, InvocationTargetException, InstantiationException, IllegalAccessException {
         // Checking if Pizza class exists
@@ -225,10 +226,10 @@ class PolymorphismPracticeTest {
         else {
             // Creating a new Pizza object and checking if it has a String attribute name
             Object testPizzaObject = createPizzaTestObject();
-            Field nameField = getFieldFromClass("Pizza", testPizzaObject, "name");
-            Object nameValue = nameField.get(testPizzaObject);
+            Field pizzaNameField = getFieldFromClass("Pizza", testPizzaObject, "name");
+            Object pizzaNameValue = pizzaNameField.get(testPizzaObject);
             // Feedback if Pizza attribute name is not string
-            if (!(nameValue instanceof String)) {
+            if (!(pizzaNameValue instanceof String)) {
                 fail("\n" +
                         "-------------------------------------------------------------------------\n" +
                         "AUTO-FEEDBACK:\n" +
@@ -274,7 +275,143 @@ class PolymorphismPracticeTest {
                         "-------------------------------------------------------------------------\n"
                 );
             }
-            Assertions.assertEquals(true, nameValue instanceof String);
+            // Checking if Pizza class exists
+            if (!classExists("Durum")||!classExists("MenuItem")) {
+                fail("\n" +
+                        "-------------------------------------------------------------------------\n" +
+                        "AUTO-FEEDBACK:\n" +
+                        "Step 2:\n" +
+                        " You need to create the Durum and MenuItem classes to pass Test 2 \n" +
+                        "-------------------------------------------------------------------------\n"
+                );
+            }
+            // Checking if Durum class extends MenuItem
+            Class<?> dClass = Class.forName("Durum");
+            Class<?> menuClass = Class.forName("MenuItem");
+            if (!menuClass.isAssignableFrom(dClass)) {
+                fail("\n" +
+                        "-------------------------------------------------------------------------\n" +
+                        "Step 2:\n" +
+                        " Durum has to be a child class to MenuItem to pass Test 2 \n" +
+                        "          Try using extends keyword in the child class \n" +
+                        "          If you are having problems with the constructor \n" +
+                        "          Try super keyword, it MUST be in the first line of constructor! \n" +
+                        "          You can find examples of inheritance here: \n" +
+                        "          \"Introduction to Java Programming and Data Structures book\"\n" +
+                        "          11.2 Superclasses and Subclasses \n" +
+                        "-------------------------------------------------------------------------\n"
+                );
+            }
+
+            // Checking if Durum name attribute exists
+            if (!fieldExists("Durum", "name")) {
+                fail("\n" +
+                        "-------------------------------------------------------------------------\n" +
+                        "AUTO-FEEDBACK:\n" +
+                        "Step 2:\n" +
+                        " You need to create the Durum name attribute to pass Test 2 \n" +
+                        "-------------------------------------------------------------------------\n"
+                );
+            }
+            // Checking if Durum name attribute is private
+            if (!durumFieldIsPrivate("name")) {
+                fail("\n" +
+                        "-------------------------------------------------------------------------\n" +
+                        "AUTO-FEEDBACK:\n" +
+                        "Step 2:\n" +
+                        " You need make the Durum name attribute private to pass Test 2 \n" +
+                        "          If you are having problems after the attribute is set to private \n" +
+                        "          create a getter method see getter (or accessor in Chapter 9)\n" +
+                        "          To see an example of creating private attributes, try \n" +
+                        "          \"Introduction to Java Programming and Data Structures book\"\n" +
+                        "          9.9 Data Field Encapsulation \n" +
+                        "-------------------------------------------------------------------------\n"
+                );
+            }
+
+            // Checking if Durum meat attribute exists
+            if (!fieldExists("Durum", "meat")) {
+                fail("\n" +
+                        "-------------------------------------------------------------------------\n" +
+                        "AUTO-FEEDBACK:\n" +
+                        "Step 2:\n" +
+                        " You need to create the Durum meat attribute to pass Test 2 \n" +
+                        "-------------------------------------------------------------------------\n"
+                );
+            }
+            // Checking if Durum meat attribute is private
+            if (!durumFieldIsPrivate("meat")) {
+                fail("\n" +
+                        "-------------------------------------------------------------------------\n" +
+                        "AUTO-FEEDBACK:\n" +
+                        "Step 2:\n" +
+                        " You need make the Durum meat attribute private to pass Test 2\n" +
+                        "          If you are having problems after the attribute is set to private \n" +
+                        "          create a getter method see getter (or accessor in Chapter 9)\n" +
+                        "          To see an example of creating private attributes, try \n" +
+                        "          \"Introduction to Java Programming and Data Structures book\"\n" +
+                        "          9.9 Data Field Encapsulation \n" +
+                        "-------------------------------------------------------------------------\n"
+                );
+            }else {
+                // Creating a new Durum object and checking if it has a String attribute name
+                Object testDurumObject = createDurumTestObject();
+                Field durumNameField = getFieldFromClass("Durum", testDurumObject, "name");
+                Object durumNameValue = durumNameField.get(testDurumObject);
+                // Feedback if Durum attribute name is not string
+                if (!(durumNameValue instanceof String)) {
+                    fail("\n" +
+                            "-------------------------------------------------------------------------\n" +
+                            "AUTO-FEEDBACK:\n" +
+                            "Step 2:\n" +
+                            " The name attribute in Durum class must be a String \n" +
+                            "          It looks like your Pizza name data type is not String \n" +
+                            "          To see an example of creating classes and attributes, try \n" +
+                            "          \"Introduction to Java Programming and Data Structures book\"\n" +
+                            "          9.3 Example: Defining Classes and Creating Objects \n" +
+                            "-------------------------------------------------------------------------\n"
+                    );
+                }
+
+                // Checking if Durum Class attribute meat is a String
+                Field meatField = getFieldFromClass("Durum", testDurumObject, "meat");
+                Object meatValue = meatField.get(testDurumObject);
+
+                if (!(meatValue instanceof String)) {
+                    fail("\n" +
+                            "-------------------------------------------------------------------------\n" +
+                            "AUTO-FEEDBACK:\n" +
+                            "Step 2:\n" +
+                            "          It looks like your Durum meat attribute type is not String \n" +
+                            "-------------------------------------------------------------------------\n"
+                    );
+                }
+                if (!(durumConstructorExists())) {
+                    fail("\n" +
+                            "-------------------------------------------------------------------------\n" +
+                            "AUTO-FEEDBACK:\n" +
+                            "Step 2:\n" +
+                            " You need to create a constructor with 2 attributes in Durum class  \n" +
+                            " The attributes are name and meat, both of type String see the UML diagram  \n" +
+                            "          To see an example of creating classes and attributes, try \n" +
+                            "          \"Introduction to Java Programming and Data Structures book\"\n" +
+                            "          9.3 Example: Defining Classes and Creating Objects \n" +
+                            "-------------------------------------------------------------------------\n"
+                    );
+                }
+
+                // Durum tests
+                Assertions.assertEquals(true, durumNameValue instanceof String);
+                Assertions.assertEquals(true, meatValue instanceof String);
+                // constructor
+                Assertions.assertEquals(true, durumConstructorExists());
+                // checking if fields are private
+                Assertions.assertEquals(true,   durumFieldIsPrivate("name"));
+                Assertions.assertEquals(true,   durumFieldIsPrivate("meat"));
+            }
+
+            // Pizza tests
+            Assertions.assertEquals(true, pizzaNameValue instanceof String);
             String[] expected = new String[]{"crust","cheese","ketchup", "pineapple","ham"};
             Assertions.assertArrayEquals(expected, ingredients);
             // constructor
@@ -282,150 +419,11 @@ class PolymorphismPracticeTest {
             // checking if fields are private
             Assertions.assertEquals(true,   pizzaFieldIsPrivate("name"));
             Assertions.assertEquals(true,   pizzaFieldIsPrivate("ingredients"));
-
         }
     }
 
-    // Test 3
-    @DisplayName("Checks Durum attributes and constructor")
-    @Test
-    void durumClassTest() throws ClassNotFoundException, NoSuchMethodException, NoSuchFieldException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        // Checking if Pizza class exists
-        if (!classExists("Durum")||!classExists("MenuItem")) {
-            fail("\n" +
-                    "-------------------------------------------------------------------------\n" +
-                    "AUTO-FEEDBACK:\n" +
-                    "Step 3:\n" +
-                    " You need to create the Durum and MenuItem classes to pass Test 3 \n" +
-                    "-------------------------------------------------------------------------\n"
-            );
-        }
-        // Checking if Durum class extends MenuItem
-        Class<?> dClass = Class.forName("Durum");
-        Class<?> mClass = Class.forName("MenuItem");
-        if (!mClass.isAssignableFrom(dClass)) {
-            fail("\n" +
-                    "-------------------------------------------------------------------------\n" +
-                    "Step 3:\n" +
-                    " Durum has to be a child class to MenuItem to pass Test 3 \n" +
-                    "          Try using extends keyword in the child class \n" +
-                    "          If you are having problems with the constructor \n" +
-                    "          Try super keyword, it MUST be in the first line of constructor! \n" +
-                    "          You can find examples of inheritance here: \n" +
-                    "          \"Introduction to Java Programming and Data Structures book\"\n" +
-                    "          11.2 Superclasses and Subclasses \n" +
-                    "-------------------------------------------------------------------------\n"
-            );
-        }
 
-        // Checking if Durum name attribute exists
-        if (!fieldExists("Pizza", "name")) {
-            fail("\n" +
-                    "-------------------------------------------------------------------------\n" +
-                    "AUTO-FEEDBACK:\n" +
-                    "Step 3:\n" +
-                    " You need to create the Durum name attribute to pass Test 3 \n" +
-                    "-------------------------------------------------------------------------\n"
-            );
-        }
-        // Checking if Durum name attribute is private
-        if (!durumFieldIsPrivate("name")) {
-            fail("\n" +
-                    "-------------------------------------------------------------------------\n" +
-                    "AUTO-FEEDBACK:\n" +
-                    "Step 3:\n" +
-                    " You need make the Durum name attribute private to pass Test 3 \n" +
-                    "          If you are having problems after the attribute is set to private \n" +
-                    "          create a getter method see getter (or accessor in Chapter 9)\n" +
-                    "          To see an example of creating private attributes, try \n" +
-                    "          \"Introduction to Java Programming and Data Structures book\"\n" +
-                    "          9.9 Data Field Encapsulation \n" +
-                    "-------------------------------------------------------------------------\n"
-            );
-        }
-
-        // Checking if Durum meat attribute exists
-        if (!fieldExists("Durum", "meat")) {
-            fail("\n" +
-                    "-------------------------------------------------------------------------\n" +
-                    "AUTO-FEEDBACK:\n" +
-                    "Step 3:\n" +
-                    " You need to create the Durum meat attribute to pass Test 3 \n" +
-                    "-------------------------------------------------------------------------\n"
-            );
-        }
-        // Checking if Durum meat attribute is private
-        if (!durumFieldIsPrivate("meat")) {
-            fail("\n" +
-                    "-------------------------------------------------------------------------\n" +
-                    "AUTO-FEEDBACK:\n" +
-                    "Step 3:\n" +
-                    " You need make the Durum meat attribute private to pass Test 3\n" +
-                    "          If you are having problems after the attribute is set to private \n" +
-                    "          create a getter method see getter (or accessor in Chapter 9)\n" +
-                    "          To see an example of creating private attributes, try \n" +
-                    "          \"Introduction to Java Programming and Data Structures book\"\n" +
-                    "          9.9 Data Field Encapsulation \n" +
-                    "-------------------------------------------------------------------------\n"
-            );
-        }else {
-            // Creating a new Durum object and checking if it has a String attribute name
-            Object testDurumObject = createDurumTestObject();
-            Field nameField = getFieldFromClass("Durum", testDurumObject, "name");
-            Object nameValue = nameField.get(testDurumObject);
-            // Feedback if Durum attribute name is not string
-            if (!(nameValue instanceof String)) {
-                fail("\n" +
-                        "-------------------------------------------------------------------------\n" +
-                        "AUTO-FEEDBACK:\n" +
-                        "Step 3:\n" +
-                        " The name attribute in Durum class must be a String \n" +
-                        "          It looks like your Pizza name data type is not String \n" +
-                        "          To see an example of creating classes and attributes, try \n" +
-                        "          \"Introduction to Java Programming and Data Structures book\"\n" +
-                        "          9.3 Example: Defining Classes and Creating Objects \n" +
-                        "-------------------------------------------------------------------------\n"
-                );
-            }
-
-            // Checking if Durum Class attribute meat is a String
-            Field meatField = getFieldFromClass("Durum", testDurumObject, "meat");
-            Object meatValue = meatField.get(testDurumObject);
-
-            if (!(meatValue instanceof String)) {
-                fail("\n" +
-                        "-------------------------------------------------------------------------\n" +
-                        "AUTO-FEEDBACK:\n" +
-                        "Step 3:\n" +
-                        "          It looks like your Durum meat attribute type is not String \n" +
-                        "-------------------------------------------------------------------------\n"
-                );
-            }
-            if (!(durumConstructorExists())) {
-                fail("\n" +
-                        "-------------------------------------------------------------------------\n" +
-                        "AUTO-FEEDBACK:\n" +
-                        "Step 3:\n" +
-                        " You need to create a constructor with 2 attributes in Durum class  \n" +
-                        " The attributes are name and meat, both of type String see the UML diagram  \n" +
-                        "          To see an example of creating classes and attributes, try \n" +
-                        "          \"Introduction to Java Programming and Data Structures book\"\n" +
-                        "          9.3 Example: Defining Classes and Creating Objects \n" +
-                        "-------------------------------------------------------------------------\n"
-                );
-            }
-            // attribute types
-            Assertions.assertEquals(true, nameValue instanceof String);
-            Assertions.assertEquals(true, meatValue instanceof String);
-            // constructor
-            Assertions.assertEquals(true, durumConstructorExists());
-            // checking if fields are private
-            Assertions.assertEquals(true,   pizzaFieldIsPrivate("name"));
-            Assertions.assertEquals(true,   pizzaFieldIsPrivate("ingredients"));
-        }
-    }
-
-    // Task 4 Test
+    // Task 3 Test
     @DisplayName("Checks OrderManager class functionality")
     @Test
     void orderTest() throws ClassNotFoundException, NoSuchMethodException, NoSuchFieldException, InvocationTargetException, InstantiationException, IllegalAccessException {
@@ -434,8 +432,8 @@ class PolymorphismPracticeTest {
             fail("\n" +
                     "-------------------------------------------------------------------------\n" +
                     "AUTO-FEEDBACK:\n" +
-                    "Step 4:\n" +
-                    " You need to create the OrderManager class to pass Test 4 \n" +
+                    "Step 3:\n" +
+                    " You need to create the OrderManager class to pass Test 3 \n" +
                     "-------------------------------------------------------------------------\n"
             );
         }
@@ -445,8 +443,25 @@ class PolymorphismPracticeTest {
             fail("\n" +
                     "-------------------------------------------------------------------------\n" +
                     "AUTO-FEEDBACK:\n" +
-                    "Step 4:\n" +
-                    " You need to create a menuItems attribute in OrderManager class to pass Test 4 \n" +
+                    "Step 3:\n" +
+                    " You need to create a menuItems attribute in OrderManager class to pass Test 3 \n" +
+                    "-------------------------------------------------------------------------\n"
+            );
+        }
+        // Checking if OrderManager menuItems attribute is an ArrayList<MenuItem>
+        Object testOrderManagerObject = createOrderManagerTestObject();
+        Field menuItemsField = getFieldFromClass("OrderManager", testOrderManagerObject, "menuItems");
+        Object menuItemsValue = menuItemsField.get(testOrderManagerObject);
+
+        if (!(menuItemsValue instanceof ArrayList)) {
+            fail("\n" +
+                    "-------------------------------------------------------------------------\n" +
+                    "AUTO-FEEDBACK:\n" +
+                    "Step 3:\n" +
+                    "          It looks like your OrderManager menuItems attribute type is not ArrayList \n" +
+                    "          To find an example of an ArrayList you can use:  \n" +
+                    "          \"Introduction to Java Programming and Data Structures book\"\n" +
+                    "          Inheritance and Polymorphism, Listing 11.8 TestArrayList.java\n" +
                     "-------------------------------------------------------------------------\n"
             );
         }
@@ -455,11 +470,12 @@ class PolymorphismPracticeTest {
             fail("\n" +
                     "-------------------------------------------------------------------------\n" +
                     "AUTO-FEEDBACK:\n" +
-                    "Step 4:\n" +
+                    "Step 3:\n" +
                     " You need to create an addMenuItem method in OrderManager class\n" +
-                    " To create this method you can use a for loop\n" +
-                    " which iterates through the menuItems MenuItem []n" +
-                    " until it finds an empty slot and then insert the menuItem there\n" +
+                    " To create this method you can use ArrayList.add \n" +
+                    " you can find an example in the book" +
+                    " \"Introduction to Java Programming and Data Structures book\"\n" +
+                    "  Inheritance and Polymorphism, Listing 11.8 TestArrayList.java\n" +
                     "-------------------------------------------------------------------------\n"
             );
         }
@@ -468,7 +484,7 @@ class PolymorphismPracticeTest {
             fail("\n" +
                     "-------------------------------------------------------------------------\n" +
                     "AUTO-FEEDBACK:\n" +
-                    "Step 4:\n" +
+                    "Step 3:\n" +
                     " You need to create a getter method fo menuItem MenuItem [] in OrderManager class\n" +
                     "          To see an example of creating classes and attributes, try \n" +
                     "         \"Introduction to Java Programming and Data Structures book\"\n" +
@@ -512,10 +528,100 @@ class PolymorphismPracticeTest {
 
     }
 
-    // Task 5 Test
-    @DisplayName("Checks OrderManager class functionality")
+    // Task 4 Test
+    @DisplayName("Checks Durum Discount functionality")
     @Test
-    void pizzeriaManagerTest() throws ClassNotFoundException, NoSuchMethodException, NoSuchFieldException, InvocationTargetException, InstantiationException, IllegalAccessException {
+    void orderManagerDurumDiscountTest() throws ClassNotFoundException, NoSuchMethodException, NoSuchFieldException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        // Checking if Pizza class exists
+        if (!classExists("MenuItem") || !classExists("OrderManager")) {
+            fail("\n" +
+                    "-------------------------------------------------------------------------\n" +
+                    "AUTO-FEEDBACK:\n" +
+                    "Step 4:\n" +
+                    " You need to create the MenuItem, and OrderManager classes to pass Test 4 \n" +
+                    "-------------------------------------------------------------------------\n"
+            );
+        }
+        if (callCalculateTotalPriceWithDurumDiscountMethod()==0.0) {
+            fail("\n" +
+                    "-------------------------------------------------------------------------\n" +
+                    "AUTO-FEEDBACK:\n" +
+                    "Step 4:\n" +
+                    " Looks like your calculateTotalPrice method does not add prices up \n" +
+                    " it returns a zero. There are several things you can check.\n" +
+                    " Make a for each loop to iterate through the ArrayList in OrderManager class\n" +
+                    " The ++ operator adding prices up must be inside the loop\n" +
+                    " Use menuItem.getPrice to access the price for each item\n" +
+                    "-------------------------------------------------------------------------\n"
+            );
+        }
+        if (callCalculateTotalPriceWithDurumDiscountMethod()==152.0) {
+            fail("\n" +
+                    "-------------------------------------------------------------------------\n" +
+                    "AUTO-FEEDBACK:\n" +
+                    "Step 4:\n" +
+                    " Looks like your calculateTotalPrice method does not \n" +
+                    " subtract the discount. It adds up prices correctly, but\n" +
+                    " id does not calculate totalPrice - durumDiscount\n" +
+                    " Did you include this statement in your code?\n" +
+                    " Another possible problem is not checking if\n" +
+                    " menuItem is an instanceof Durum, to see if\n" +
+                    " the order contains a Durum.\n" +
+                    " You can find an example of using instance of in the book\n" +
+                    "         \"Introduction to Java Programming and Data Structures book\"\n" +
+                    "          11.9 Casting Objects and the instanceof Operator\n" +
+                    "-------------------------------------------------------------------------\n"
+            );
+        }
+        if (callCalculateTotalPriceWithDurumDiscountMethod()==132.0) {
+            fail("\n" +
+                    "-------------------------------------------------------------------------\n" +
+                    "AUTO-FEEDBACK:\n" +
+                    "Step 4:\n" +
+                    " Looks like your calculateTotalPrice method gives \n" +
+                    " a discount for all items, on the menuItem list\n" +
+                    " It should only give the discount for Durum items\n" +
+                    " To check if a MenuItem is a Durum try to use\n" +
+                    " instanceof operator, you can find examples here: \n" +
+                    "         \"Introduction to Java Programming and Data Structures book\"\n" +
+                    "          11.9 Casting Objects and the instanceof Operator\n" +
+                    "-------------------------------------------------------------------------\n"
+            );
+        }
+        if (callCalculateTotalPriceWithDurumDiscountMethod()==87.0) {
+            fail("\n" +
+                    "-------------------------------------------------------------------------\n" +
+                    "AUTO-FEEDBACK:\n" +
+                    "Step 4:\n" +
+                    " Looks like your calculateTotalPrice method only sums up pizza prices \n" +
+                    " and does not add durum prices to totalPrice\n" +
+                    " make sure you use menuItem.getPrice() in your calculations\n" +
+                    " remember to iterate it using ++ operator\n" +
+                    " use a loop to sum all prices in the order\n" +
+                    "-------------------------------------------------------------------------\n"
+            );
+        }
+        if (callCalculateTotalPriceWithDurumDiscountMethod()==65.0) {
+            fail("\n" +
+                    "-------------------------------------------------------------------------\n" +
+                    "AUTO-FEEDBACK:\n" +
+                    "Step 4:\n" +
+                    " Looks like your calculateTotalPrice method only sums up durum prices \n" +
+                    " and does not add pizza prices to totalPrice\n" +
+                    " make sure you use menuItem.getPrice() in your calculations\n" +
+                    " remember to iterate it using ++ operator\n" +
+                    " use a loop to sum all prices in the order\n" +
+                    "-------------------------------------------------------------------------\n"
+            );
+        }
+        // checking is sum is correct
+        Assertions.assertEquals(142.0, callCalculateTotalPriceWithDurumDiscountMethod());
+    }
+
+    // Task 5 Test
+    @DisplayName("Checks Family Price functionality")
+    @Test
+    void orderManagerFamilyPizzaTest() throws ClassNotFoundException, NoSuchMethodException, NoSuchFieldException, InvocationTargetException, InstantiationException, IllegalAccessException {
         // Checking if Pizza class exists
         if (!classExists("MenuItem") || !classExists("OrderManager")) {
             fail("\n" +
@@ -535,7 +641,7 @@ class PolymorphismPracticeTest {
                     " it returns a zero. There are several things you can check.\n" +
                     " The ++ operator adding prices up must be inside the loop\n" +
                     " Use menuItem.getPrice to access the price for each item\n" +
-                    " Make a loop to iterate through the MenuItem [] in Order class\n" +
+                    " Make a loop to iterate through the menuItems ArrayList in Order class\n" +
                     "-------------------------------------------------------------------------\n"
             );
         }
@@ -565,8 +671,26 @@ class PolymorphismPracticeTest {
                     "-------------------------------------------------------------------------\n"
             );
         }
-        // checking is sum is correct
-        Assertions.assertEquals(152.0, callCalculateTotalPriceMethod());
+        if (callCalculateTotalPriceFamilyPizzaMethod()==152.0) {
+            fail("\n" +
+                    "-------------------------------------------------------------------------\n" +
+                    "AUTO-FEEDBACK:\n" +
+                    "Step 5:\n" +
+                    " Looks like your calculateTotalPrice method did not\n" +
+                    " add extra 100 to totalPrice for the family pizza." +
+                    " To successfully implement this method, try to\n" +
+                    " check if menuItem ArrayList has items, that are\n" +
+                    " instanceof Pizza, like in step 4\n" +
+                    " If that condition is true, cast the menuItem\n" +
+                    " To pizza to access the type parameter, using a getter\n" +
+                    " You can find an example of casting here\n" +
+                    " \"Introduction to Java Programming and Data Structures book\"\n" +
+                    " 11.9 Casting Objects\n" +
+                    "-------------------------------------------------------------------------\n"
+            );
+        }
+        // checking if total sum including extra 100 for family pizza is correct
+        Assertions.assertEquals(252, callCalculateTotalPriceFamilyPizzaMethod());
 
     }
 
@@ -705,6 +829,14 @@ class PolymorphismPracticeTest {
         return instance;
     }
 
+    private Object createOrderManagerTestObject() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        Class<?> TempClass = Class.forName("OrderManager");
+        // getting OrderManager class constructor
+        Constructor<?> constructor = TempClass.getConstructor();
+        Object instance = constructor.newInstance();
+        return instance;
+    }
+
     private Field getFieldFromClass(String className, Object testObject, String attributeName) throws ClassNotFoundException, NoSuchFieldException {
         Class<?> TempClass = Class.forName(className);
         Field field = TempClass.getDeclaredField(attributeName);
@@ -824,6 +956,122 @@ class PolymorphismPracticeTest {
             Object[] arguments = new Object[2];
             arguments[0] = "TestName";
             arguments[1] = "TestSize";
+            // Instantiating Pizza object
+            Object pizzaObject = pizzaConstructor.newInstance(arguments);
+
+            // Add a durum to the order
+            Class<?> DurumClass = Class.forName("Durum");
+            // Making a durum instance
+            Constructor<?> durumConstructor = DurumClass.getConstructor(String.class, String.class);
+            // Object array for the constructor attributes
+            Object[] arguments2 = new Object[2];
+            arguments2[0] = "TestName";
+            arguments2[1] = "TestMeat";
+            // Instantiating Durum object
+            Object durumObject = durumConstructor.newInstance(arguments2);
+
+            // Invoke the addPizza method to add it to the order
+            addMenuItemMethod.invoke(orderManagerObject, pizzaObject);
+            addMenuItemMethod.invoke(orderManagerObject, durumObject);
+
+            // Invoke the calculateTotalPrice method
+            Object result = calculateTotalPriceMethod.invoke(orderManagerObject);
+            totalPrice = (double) result;
+
+        } catch (IllegalAccessException e) {
+
+        } catch (InvocationTargetException e) {
+
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
+
+        return totalPrice;
+    }
+    private double callCalculateTotalPriceWithDurumDiscountMethod() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        double totalPrice = 0.0;
+        try {
+            // Making a new OrderManager object
+            Class<?> OrderManagerClass = Class.forName("OrderManager");
+            Constructor<?> constructor = OrderManagerClass.getConstructor();
+            Object orderManagerObject = constructor.newInstance();
+
+            // Accessing the calculate total price method
+            Method calculateTotalPriceMethod = OrderManagerClass.getMethod("calculateTotalPrice", double.class);
+
+            // Make order pizzas field accessible
+            Field orderMenuItemsField = OrderManagerClass.getDeclaredField("menuItems");
+            orderMenuItemsField.setAccessible(true);
+
+            // Add a pizza to the order
+            Class<?> MenuItemClass = Class.forName("MenuItem");
+            Method addMenuItemMethod = OrderManagerClass.getMethod("addMenuItem", MenuItemClass);
+
+            // Making a pizza instance
+            Class<?> PizzaClass = Class.forName("Pizza");
+            Constructor<?> pizzaConstructor = PizzaClass.getConstructor(String.class,String.class);
+            // Object array for the constructor attributes
+            Object[] arguments = new Object[2];
+            arguments[0] = "TestName";
+            arguments[1] = "TestSize";
+            // Instantiating Pizza object
+            Object pizzaObject = pizzaConstructor.newInstance(arguments);
+
+            // Add a durum to the order
+            Class<?> DurumClass = Class.forName("Durum");
+            // Making a durum instance
+            Constructor<?> durumConstructor = DurumClass.getConstructor(String.class, String.class);
+            // Object array for the constructor attributes
+            Object[] arguments2 = new Object[2];
+            arguments2[0] = "TestName";
+            arguments2[1] = "TestMeat";
+            // Instantiating Durum object
+            Object durumObject = durumConstructor.newInstance(arguments2);
+
+            // Invoke the addPizza method to add it to the order
+            addMenuItemMethod.invoke(orderManagerObject, pizzaObject);
+            addMenuItemMethod.invoke(orderManagerObject, durumObject);
+
+            // Invoke the calculateTotalPrice method
+            Object result = calculateTotalPriceMethod.invoke(orderManagerObject, 10.0);
+            totalPrice = (double) result;
+
+        } catch (IllegalAccessException e) {
+
+        } catch (InvocationTargetException e) {
+
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
+
+        return totalPrice;
+    }
+    private double callCalculateTotalPriceFamilyPizzaMethod() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        double totalPrice = 0.0;
+        try {
+            // Making a new OrderManager object
+            Class<?> OrderManagerClass = Class.forName("OrderManager");
+            Constructor<?> constructor = OrderManagerClass.getConstructor();
+            Object orderManagerObject = constructor.newInstance();
+
+            // Accessing the calculate total price method
+            Method calculateTotalPriceMethod = OrderManagerClass.getMethod("calculateTotalPrice");
+
+            // Make order pizzas field accessible
+            Field orderMenuItemsField = OrderManagerClass.getDeclaredField("menuItems");
+            orderMenuItemsField.setAccessible(true);
+
+            // Add a pizza to the order
+            Class<?> MenuItemClass = Class.forName("MenuItem");
+            Method addMenuItemMethod = OrderManagerClass.getMethod("addMenuItem", MenuItemClass);
+
+            // Making a pizza instance
+            Class<?> PizzaClass = Class.forName("Pizza");
+            Constructor<?> pizzaConstructor = PizzaClass.getConstructor(String.class,String.class);
+            // Object array for the constructor attributes
+            Object[] arguments = new Object[2];
+            arguments[0] = "TestName";
+            arguments[1] = "family";
             // Instantiating Pizza object
             Object pizzaObject = pizzaConstructor.newInstance(arguments);
 
