@@ -9,8 +9,8 @@ import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-class InheritancePracticeTest {
-    InheritancePracticeTest() {
+class PolymorphismPracticeTest {
+    PolymorphismPracticeTest() {
     }
 
     // Step 1 Test
@@ -27,31 +27,7 @@ class InheritancePracticeTest {
                     "-------------------------------------------------------------------------\n"
             );
         }
-        // Checking if ManuItem number attribute exists
-        if (!fieldExists("MenuItem", "number")) {
-            fail("\n" +
-                    "-------------------------------------------------------------------------\n" +
-                    "AUTO-FEEDBACK:\n" +
-                    "Step 1:\n" +
-                    " You need to create the MenuItem number attribute to pass Test 1 \n" +
-                    "-------------------------------------------------------------------------\n"
-            );
-        }
-        // Checking if MenuItem number attribute is private
-        if (!menuItemFieldIsPrivate("number")) {
-            fail("\n" +
-                    "-------------------------------------------------------------------------\n" +
-                    "AUTO-FEEDBACK:\n" +
-                    "Step 1:\n" +
-                    " You need make the MenuItem number attribute private to pass Test 1 \n" +
-                    "          If you are having problems after the attribute is set to private \n" +
-                    "          create a getter method see getter (or accessor in Chapter 9)\n" +
-                    "          To see an example of creating private attributes, try \n" +
-                    "          \"Introduction to Java Programming and Data Structures book\"\n" +
-                    "          9.9 Data Field Encapsulation \n" +
-                    "-------------------------------------------------------------------------\n"
-            );
-        }
+
         // Checking if MenuItem price attribute exists
         if (!fieldExists("MenuItem", "price")) {
             fail("\n" +
@@ -63,7 +39,7 @@ class InheritancePracticeTest {
             );
         }
         // Checking if MenuItem price attribute is private
-        if (!menuItemFieldIsPrivate("number")) {
+        if (!menuItemFieldIsPrivate("price")) {
             fail("\n" +
                     "-------------------------------------------------------------------------\n" +
                     "AUTO-FEEDBACK:\n" +
@@ -77,49 +53,9 @@ class InheritancePracticeTest {
                     "-------------------------------------------------------------------------\n"
             );
         }
-        // Checking if MenuItem type attribute exists
-        if (!fieldExists("MenuItem", "type")) {
-            fail("\n" +
-                    "-------------------------------------------------------------------------\n" +
-                    "AUTO-FEEDBACK:\n" +
-                    "Step 1:\n" +
-                    " You need to create the MenuItem type attribute to pass Test 1 \n" +
-                    "-------------------------------------------------------------------------\n"
-            );
-        }
-        // Checking if MenuItem type attribute is private
-        if (!menuItemFieldIsPrivate("type")) {
-            fail("\n" +
-                    "-------------------------------------------------------------------------\n" +
-                    "AUTO-FEEDBACK:\n" +
-                    "Step 1:\n" +
-                    " You need make the MenuItem type attribute private to pass Test 1 \n" +
-                    "          If you are having problems after the attribute is set to private \n" +
-                    "          create a getter method see getter (or accessor in Chapter 9)\n" +
-                    "          To see an example of creating private attributes, try \n" +
-                    "          \"Introduction to Java Programming and Data Structures book\"\n" +
-                    "          9.9 Data Field Encapsulation \n" +
-                    "-------------------------------------------------------------------------\n"
-            );
-        }else {
-            // Creating a new MenuItem object and checking if it has a int attribute number
+        else {
+            // Creating a new MenuItem object and checking if it has a double attribute price
             Object testMenuItemObject = createMenuItemTestObject();
-            Field numberField = getFieldFromClass("MenuItem", testMenuItemObject, "number");
-            Object numberValue = numberField.get(testMenuItemObject);
-            // Feedback if MenuItem attribute number is not an int
-            if (!(numberValue instanceof Integer)) {
-                fail("\n" +
-                        "-------------------------------------------------------------------------\n" +
-                        "AUTO-FEEDBACK:\n" +
-                        "Step 1:\n" +
-                        " The number attribute in MenuItem class must be an int \n" +
-                        "          To see an example of creating classes and attributes, try \n" +
-                        "          \"Introduction to Java Programming and Data Structures book\"\n" +
-                        "          9.3 Example: Defining Classes and Creating Objects \n" +
-                        "-------------------------------------------------------------------------\n"
-                );
-            }
-
             Field priceField = getFieldFromClass("MenuItem", testMenuItemObject, "price");
             Object priceValue = priceField.get(testMenuItemObject);
             if (!(priceValue instanceof Double)) {
@@ -153,20 +89,6 @@ class InheritancePracticeTest {
                 );
             }
 
-            Field typeField = getFieldFromClass("MenuItem", testPizzaObject, "type");
-            Object typeValue = typeField.get(testMenuItemObject);
-            if (!(typeValue instanceof String)) {
-                fail("\n" +
-                        "-------------------------------------------------------------------------\n" +
-                        "AUTO-FEEDBACK:\n" +
-                        "Step 1:\n" +
-                        " The type attribute in MenuItem class must be a String \n" +
-                        "          To see an example of creating classes and attributes, try \n" +
-                        "          \"Introduction to Java Programming and Data Structures book\"\n" +
-                        "          9.3 Example: Defining Classes and Creating Objects \n" +
-                        "-------------------------------------------------------------------------\n"
-                );
-            }
             if (!(menuItemConstructorExists())) {
                 fail("\n" +
                         "-------------------------------------------------------------------------\n" +
@@ -182,18 +104,11 @@ class InheritancePracticeTest {
             }
 
             // fields are correct types
-            Assertions.assertEquals(true, numberValue instanceof Integer);
             Assertions.assertEquals(true, priceValue instanceof Double);
-            Assertions.assertEquals(true, typeValue instanceof String);
             // constructor
             Assertions.assertEquals(true, menuItemConstructorExists());
             // fields are private
-            Assertions.assertEquals(true, menuItemFieldIsPrivate("number"));
             Assertions.assertEquals(true, menuItemFieldIsPrivate("price"));
-            Assertions.assertEquals(true, menuItemFieldIsPrivate("type"));
-
-
-
         }
     }
 
@@ -254,6 +169,32 @@ class InheritancePracticeTest {
                     "-------------------------------------------------------------------------\n"
             );
         }
+        // Checking if Pizza size attribute exists
+        if (!fieldExists("Pizza", "size")) {
+            fail("\n" +
+                    "-------------------------------------------------------------------------\n" +
+                    "AUTO-FEEDBACK:\n" +
+                    "Step 2:\n" +
+                    " You need to create the Pizza size attribute to pass Test 2 \n" +
+                    "-------------------------------------------------------------------------\n"
+            );
+        }
+        // Checking if Pizza size attribute is private
+        if (!pizzaFieldIsPrivate("size")) {
+            fail("\n" +
+                    "-------------------------------------------------------------------------\n" +
+                    "AUTO-FEEDBACK:\n" +
+                    "Step 2:\n" +
+                    " You need make the Pizza size attribute private to pass Test 2 \n" +
+                    "          If you are having problems after the attribute is set to private \n" +
+                    "          create a getter method see getter (or accessor in Chapter 9)\n" +
+                    "          To see an example of creating private attributes, try \n" +
+                    "          \"Introduction to Java Programming and Data Structures book\"\n" +
+                    "          9.9 Data Field Encapsulation \n" +
+                    "-------------------------------------------------------------------------\n"
+            );
+        }
+
 
         // Checking if Pizza ingredients attribute exists
         if (!fieldExists("Pizza", "ingredients")) {
@@ -485,37 +426,37 @@ class InheritancePracticeTest {
     }
 
     // Task 4 Test
-    @DisplayName("Checks Order class functionality")
+    @DisplayName("Checks OrderManager class functionality")
     @Test
     void orderTest() throws ClassNotFoundException, NoSuchMethodException, NoSuchFieldException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        // Checking if Order class exists
-        if (!classExists("Order")) {
+        // Checking if OrderManager class exists
+        if (!classExists("OrderManager")) {
             fail("\n" +
                     "-------------------------------------------------------------------------\n" +
                     "AUTO-FEEDBACK:\n" +
                     "Step 4:\n" +
-                    " You need to create the Order class to pass Test 4 \n" +
+                    " You need to create the OrderManager class to pass Test 4 \n" +
                     "-------------------------------------------------------------------------\n"
             );
         }
 
-        // Checking if Order menuItems fiels exists
-        if (!fieldExists("Order", "menuItems")) {
+        // Checking if OrderManager menuItems fiels exists
+        if (!fieldExists("OrderManager", "menuItems")) {
             fail("\n" +
                     "-------------------------------------------------------------------------\n" +
                     "AUTO-FEEDBACK:\n" +
                     "Step 4:\n" +
-                    " You need to create a menuItems attribute in Order class to pass Test 4 \n" +
+                    " You need to create a menuItems attribute in OrderManager class to pass Test 4 \n" +
                     "-------------------------------------------------------------------------\n"
             );
         }
-        // Checking if Order addMenuItem method exists
+        // Checking if OrderManager addMenuItem method exists
         if (!addMenuItemMethodExists()) {
             fail("\n" +
                     "-------------------------------------------------------------------------\n" +
                     "AUTO-FEEDBACK:\n" +
                     "Step 4:\n" +
-                    " You need to create an addMenuItem method in Order class\n" +
+                    " You need to create an addMenuItem method in OrderManager class\n" +
                     " To create this method you can use a for loop\n" +
                     " which iterates through the menuItems MenuItem []n" +
                     " until it finds an empty slot and then insert the menuItem there\n" +
@@ -528,7 +469,7 @@ class InheritancePracticeTest {
                     "-------------------------------------------------------------------------\n" +
                     "AUTO-FEEDBACK:\n" +
                     "Step 4:\n" +
-                    " You need to create a getter method fo menuItem MenuItem [] in Order class\n" +
+                    " You need to create a getter method fo menuItem MenuItem [] in OrderManager class\n" +
                     "          To see an example of creating classes and attributes, try \n" +
                     "         \"Introduction to Java Programming and Data Structures book\"\n" +
                     "          9.9 Data Field Encapsulation, getter (or mutator) \n" +
@@ -540,7 +481,7 @@ class InheritancePracticeTest {
                     "-------------------------------------------------------------------------\n" +
                     "AUTO-FEEDBACK:\n" +
                     "Step 4:\n" +
-                    " It looks like Pizza objects can not be added to your menuItems MenuItem [] in Order class\n" +
+                    " It looks like Pizza objects can not be added to your menuItems MenuItem [] in OrderManager class\n" +
                     "          Did you remember to extend the MenuItem class in Durum class? \n" +
                     "          You can find an example of inheritance here: \n" +
                     "         \"Introduction to Java Programming and Data Structures book\"\n" +
@@ -553,7 +494,7 @@ class InheritancePracticeTest {
                     "-------------------------------------------------------------------------\n" +
                     "AUTO-FEEDBACK:\n" +
                     "Step 4:\n" +
-                    " It looks like Durum objects can not be added to your menuItems MenuItem [] in Order class\n" +
+                    " It looks like Durum objects can not be added to your menuItems MenuItem [] in OrderManager class\n" +
                     "          Did you remember to extend the MenuItem class in Durum class? \n" +
                     "          You can find an example of inheritance here: \n" +
                     "         \"Introduction to Java Programming and Data Structures book\"\n" +
@@ -572,16 +513,16 @@ class InheritancePracticeTest {
     }
 
     // Task 5 Test
-    @DisplayName("Checks PizzaManager class functionality")
+    @DisplayName("Checks OrderManager class functionality")
     @Test
     void pizzeriaManagerTest() throws ClassNotFoundException, NoSuchMethodException, NoSuchFieldException, InvocationTargetException, InstantiationException, IllegalAccessException {
         // Checking if Pizza class exists
-        if (!classExists("MenuItem") || !classExists("Order") || !classExists("PizzeriaManager")) {
+        if (!classExists("MenuItem") || !classExists("OrderManager")) {
             fail("\n" +
                     "-------------------------------------------------------------------------\n" +
                     "AUTO-FEEDBACK:\n" +
                     "Step 5:\n" +
-                    " You need to create the MenuItem, Order and PizzaManager classes to pass Test 5 \n" +
+                    " You need to create the MenuItem, OrderManager and PizzaManager classes to pass Test 5 \n" +
                     "-------------------------------------------------------------------------\n"
             );
         }
@@ -702,9 +643,9 @@ class InheritancePracticeTest {
 
     public boolean addMenuItemMethodExists() {
         try {
-            Class<?> OrderClass = Class.forName("Order");
+            Class<?> OrderManagerClass = Class.forName("OrderManager");
             Class<?> MenuItemClass = Class.forName("MenuItem");
-            Method addMenuItemMethod = OrderClass.getMethod("addMenuItem", MenuItemClass);
+            Method addMenuItemMethod = OrderManagerClass.getMethod("addMenuItem", MenuItemClass);
             return true;
         } catch (ClassNotFoundException e) {
             return false;
@@ -715,8 +656,8 @@ class InheritancePracticeTest {
 
     public boolean getMenuItemsMethodExists() {
         try {
-            Class<?> OrderClass = Class.forName("Order");
-            Method getMenuItemsMethod = OrderClass.getMethod("getMenuItems");
+            Class<?> OrderManagerClass = Class.forName("OrderManager");
+            Method getMenuItemsMethod = OrderManagerClass.getMethod("getMenuItems");
             return true;
         } catch (ClassNotFoundException e) {
             return false;
@@ -730,10 +671,11 @@ class InheritancePracticeTest {
         // If Pizza class exists check if the name attribute is a String
         Class<?> TempClass = Class.forName("Pizza");
         // getting Pizza class constructor
-        Constructor<?> constructor = TempClass.getConstructor(String.class);
+        Constructor<?> constructor = TempClass.getConstructor(String.class, String.class);
         // Object array for the constructor attributes
-        Object[] arguments = new Object[1];
+        Object[] arguments = new Object[2];
         arguments[0] = "PizzaTestName";
+        arguments[1] = "PizzaTestSize";
         // Instantiating Pizza object
         Object instance = constructor.newInstance(arguments);
         return instance;
@@ -742,11 +684,10 @@ class InheritancePracticeTest {
     private Object createMenuItemTestObject() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         Class<?> TempClass = Class.forName("MenuItem");
         // getting MenuItem class constructor
-        Constructor<?> constructor = TempClass.getConstructor(String.class, double.class);
+        Constructor<?> constructor = TempClass.getConstructor(double.class);
         // Object array for the constructor attributes
-        Object[] arguments = new Object[2];
-        arguments[0] = "default menu item";
-        arguments[1] = 50.0;
+        Object[] arguments = new Object[1];
+        arguments[0] = 50.0;
         // Instantiating PMenuItem object
         Object instance = constructor.newInstance(arguments);
         return instance;
@@ -776,25 +717,26 @@ class InheritancePracticeTest {
         boolean menuItemAdded = false;
         try {
             // Making a new order object
-            Class<?> OrderClass = Class.forName("Order");
-            Constructor<?> constructor = OrderClass.getConstructor();
+            Class<?> OrderManagerClass = Class.forName("OrderManager");
+            Constructor<?> constructor = OrderManagerClass.getConstructor();
             Object orderObject = constructor.newInstance();
 
             // Making a new MenuItem object
             Class<?> MenuItemClass = Class.forName("MenuItem");
-            Method addMenuItemMethod = OrderClass.getMethod("addMenuItem", MenuItemClass);
+            Method addMenuItemMethod = OrderManagerClass.getMethod("addMenuItem", MenuItemClass);
 
             // Making a pizza instance to invoke method with
             Class<?> PizzaClass = Class.forName("Pizza");
-            Constructor<?> pizzaConstructor = PizzaClass.getConstructor(String.class);
+            Constructor<?> pizzaConstructor = PizzaClass.getConstructor(String.class, String.class);
             // Object array for the constructor attributes
-            Object[] arguments = new Object[1];
+            Object[] arguments = new Object[2];
             arguments[0] = "TestName";
+            arguments[1] = "TestSize";
             // Instantiating Pizza object
             Object pizzaObject = pizzaConstructor.newInstance(arguments);
 
             // Make order menuItems field accessible
-            Field orderMenuItemsField = OrderClass.getDeclaredField("menuItems");
+            Field orderMenuItemsField = OrderManagerClass.getDeclaredField("menuItems");
             orderMenuItemsField.setAccessible(true);
 
             // Invoke the method
@@ -817,13 +759,13 @@ class InheritancePracticeTest {
         boolean menuItemAdded = false;
         try {
             // Making a new order object
-            Class<?> OrderClass = Class.forName("Order");
-            Constructor<?> constructor = OrderClass.getConstructor();
+            Class<?> OrderManagerClass = Class.forName("OrderManager");
+            Constructor<?> constructor = OrderManagerClass.getConstructor();
             Object orderObject = constructor.newInstance();
 
             // Making a new MenuItem object
             Class<?> MenuItemClass = Class.forName("MenuItem");
-            Method addMenuItemMethod = OrderClass.getMethod("addMenuItem", MenuItemClass);
+            Method addMenuItemMethod = OrderManagerClass.getMethod("addMenuItem", MenuItemClass);
 
             // Making a pizza instance to invoke method with
             Class<?> DurumClass = Class.forName("Durum");
@@ -836,7 +778,7 @@ class InheritancePracticeTest {
             Object durumObject = durumConstructor.newInstance(arguments);
 
             // Make order menuItems field accessible
-            Field orderMenuItemsField = OrderClass.getDeclaredField("menuItems");
+            Field orderMenuItemsField = OrderManagerClass.getDeclaredField("menuItems");
             orderMenuItemsField.setAccessible(true);
 
             // Invoke the method
@@ -859,33 +801,29 @@ class InheritancePracticeTest {
     private double callCalculateTotalPriceMethod() throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
         double totalPrice = 0.0;
         try {
-            // Making a new PizzaManager object
-            Class<?> PizzaManagerClass = Class.forName("PizzeriaManager");
-            Constructor<?> constructor = PizzaManagerClass.getConstructor();
-            Object pizzaManagerObject = constructor.newInstance();
+            // Making a new OrderManager object
+            Class<?> OrderManagerClass = Class.forName("OrderManager");
+            Constructor<?> constructor = OrderManagerClass.getConstructor();
+            Object orderManagerObject = constructor.newInstance();
 
-            // Making a new order object
-            Class<?> OrderClass = Class.forName("Order");
-            Method calculateTotalPriceMethod = PizzaManagerClass.getMethod("calculateTotalPrice", OrderClass);
-
-            // Making an order instance to invoke canculateTotalPrice method with
-            Constructor<?> orderConstructor = OrderClass.getConstructor();
-            Object orderObject = orderConstructor.newInstance();
+            // Accessing the calculate total price method
+            Method calculateTotalPriceMethod = OrderManagerClass.getMethod("calculateTotalPrice");
 
             // Make order pizzas field accessible
-            Field orderMenuItemsField = OrderClass.getDeclaredField("menuItems");
+            Field orderMenuItemsField = OrderManagerClass.getDeclaredField("menuItems");
             orderMenuItemsField.setAccessible(true);
 
             // Add a pizza to the order
             Class<?> MenuItemClass = Class.forName("MenuItem");
-            Method addMenuItemMethod = OrderClass.getMethod("addMenuItem", MenuItemClass);
+            Method addMenuItemMethod = OrderManagerClass.getMethod("addMenuItem", MenuItemClass);
 
             // Making a pizza instance
             Class<?> PizzaClass = Class.forName("Pizza");
-            Constructor<?> pizzaConstructor = PizzaClass.getConstructor(String.class);
+            Constructor<?> pizzaConstructor = PizzaClass.getConstructor(String.class,String.class);
             // Object array for the constructor attributes
-            Object[] arguments = new Object[1];
+            Object[] arguments = new Object[2];
             arguments[0] = "TestName";
+            arguments[1] = "TestSize";
             // Instantiating Pizza object
             Object pizzaObject = pizzaConstructor.newInstance(arguments);
 
@@ -901,11 +839,11 @@ class InheritancePracticeTest {
             Object durumObject = durumConstructor.newInstance(arguments2);
 
             // Invoke the addPizza method to add it to the order
-            addMenuItemMethod.invoke(orderObject, pizzaObject);
-            addMenuItemMethod.invoke(orderObject, durumObject);
+            addMenuItemMethod.invoke(orderManagerObject, pizzaObject);
+            addMenuItemMethod.invoke(orderManagerObject, durumObject);
 
             // Invoke the calculateTotalPrice method
-            Object result = calculateTotalPriceMethod.invoke(pizzaManagerObject, orderObject);
+            Object result = calculateTotalPriceMethod.invoke(orderManagerObject);
             totalPrice = (double) result;
 
         } catch (IllegalAccessException e) {
@@ -921,7 +859,7 @@ class InheritancePracticeTest {
     public boolean menuItemConstructorExists() {
         try {
             Class<?> MenuItemClass = Class.forName("MenuItem");
-            Constructor<?> constructor = MenuItemClass.getConstructor(String.class, double.class);
+            Constructor<?> constructor = MenuItemClass.getConstructor(double.class);
             return true;
 
         } catch (ClassNotFoundException e) {
@@ -934,7 +872,7 @@ class InheritancePracticeTest {
     public boolean pizzaConstructorExists() {
         try {
             Class<?> PizzaClass = Class.forName("Pizza");
-            Constructor<?> constructor = PizzaClass.getConstructor(String.class);
+            Constructor<?> constructor = PizzaClass.getConstructor(String.class, String.class);
             return true;
 
         } catch (ClassNotFoundException e) {

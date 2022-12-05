@@ -5,7 +5,7 @@ public class Durum extends MenuItem{
     private String meat;
 
     public Durum(String name, String meat) {
-        super("durum",65.0);
+        super(65.0);
         this.name = name;
         this.meat = meat;
     }

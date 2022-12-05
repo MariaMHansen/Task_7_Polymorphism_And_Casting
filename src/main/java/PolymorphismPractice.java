@@ -1,27 +1,17 @@
-import java.util.Arrays;
+/*
+   Welcome to assignment seven, ...
 
-    /*
-       Welcome to assignment six,
-       Where you will practice with using inheritance and Overriding
-       (Not to be confused with Overloading which was explored in task 5)
-       In this task you will learn to make a superclass and child classes,
-       and learn about changing the functionality of a method from another class.
 
-       ------------------------------------------------------------
-       Inheritance
-       -------------------------------------------------------------
-       Inheritance is one of the big words that comes along with learning Object-Oriented Programming
-       It is a mechanism in which a child object acquires the properties and behaviors of  parent object.
-       This is very useful in programming, for example if you have different types of users in
-       your system: an Admin, a Guest and a RegisteredUser. They are all different classes,
-       but they have common characteristics like username and password,
-       these attributes could be stored in a super class called User.
+   ------------------------------------------------------------
+   Polymorphism
+   -------------------------------------------------------------
+   ...
 
-       In this exercise, you will practice creating parent and child classes.
-       We will continue working on the pizzeria application and
-       add we have a new product on the menu, it is durum!
-       Scroll down to STEP 1:
-       */
+   In this exercise, you will practice using Polymorphism to ......
+   We will continue working on the pizzeria application and
+   add we have a new product on the menu, it is durum!
+   Scroll down to STEP 1:
+   */
 
 /**
  * This is the Main method,
@@ -38,18 +28,23 @@ import java.util.Arrays;
  *
  */
 
-public class InheritancePractice {
+public class PolymorphismPractice {
     public static void main(String[] args) {
-        InheritancePractice op = new InheritancePractice();
-        System.out.println("Task 1: " ); op.getMenuItemInfo();
-        System.out.println("Task 2: " ); op.makePizza();
-        System.out.println("Task 3: " ); op.makeDurum();
-        System.out.println("Task 4: " ); op.createOrder();
-        System.out.println("Task 5: " ); op.createPizzeriaManager();
+        PolymorphismPractice op = new PolymorphismPractice();
+        System.out.println("Task 1: ");
+        op.getMenuItemInfo();
+        System.out.println("Task 2: ");
+        op.makePizzaAndDurum();
+        System.out.println("Task 3: ");
+        op.checkOrderManager();
+        System.out.println("Task 4: ");
+        op.checkDurumDiscount();
+        System.out.println("Task 5: "); op.checkTotalPriceWithFamilyPizza();
     }
+
     /**
      * Task 1
-     *
+     * <p>
      * In this task we will make a MenuItem class (see the UML diagram for reference)
      * The MenuItem class needs to have number(int), price(double) and type(String) attributes.
      * The possible types, that will be used for MenuItem objects are: pizza and durum.
@@ -67,9 +62,9 @@ public class InheritancePractice {
      * Difficulty: 2
      */
 
-    public void getMenuItemInfo(){
-        MenuItem menuItem1 = new MenuItem("default menu item", 50.0);
-        System.out.println(menuItem1);
+    public void getMenuItemInfo() {
+        MenuItem menuItem1 = new MenuItem(50.0);
+        System.out.println("MenuItem: " + menuItem1);
 
     }
 
@@ -94,10 +89,13 @@ public class InheritancePractice {
      */
 
 
-    public void makePizza(){
-        Pizza hawaiiPizza = new Pizza("Hawaii");
-        System.out.println(hawaiiPizza);
+    public void makePizzaAndDurum() {
+        Pizza hawaiiPizza = new Pizza("Hawaii", "regular");
+        System.out.println("Pizza: " + hawaiiPizza);
+        Durum classicDurum = new Durum("classic", "kebab");
+        System.out.println("Durum: " + classicDurum);
     }
+
     /**
      * Task 3
      * The second type of MenuItems the pizzeria will produce is Durum.
@@ -115,12 +113,15 @@ public class InheritancePractice {
      * New skills: overriding methods, super keyword
      * Difficulty: 3
      */
-
-    public void makeDurum(){
-        Durum classicDurum = new Durum("classic", "kebab");
-        System.out.println(classicDurum);
-
+    public void checkOrderManager() {
+        // Task 3
+        OrderManager orderManager = new OrderManager();
+        orderManager.addMenuItem(new Pizza("Peperoni", "regular"));
+        orderManager.addMenuItem(new Durum("Classic Durum", "chicken"));
+        orderManager.printMenuItems();
     }
+
+
     /**
      * Task 4
      * Create an Order class, with one attribute, which is
@@ -137,15 +138,15 @@ public class InheritancePractice {
      * Difficulty: 4
      */
 
-    public void createOrder(){
-        Order order = new Order();
-        Pizza standardPizza = new Pizza("Margherita");
-        order.addMenuItem(standardPizza);
-        Durum classicDurum = new Durum("classic", "kebab");
-        order.addMenuItem(classicDurum);
-        System.out.println("Order details: ");
-        order.printMenuItems();
+    public void checkDurumDiscount() {
+        // Task 3
+        OrderManager orderManager = new OrderManager();
+        orderManager.addMenuItem(new Pizza("Peperoni", "regular"));
+        orderManager.addMenuItem(new Durum("Classic Durum", "chicken"));
+        System.out.println("Price before discount: " + orderManager.calculateTotalPrice());
+        System.out.println("Price with durum discount: " + orderManager.calculateTotalPrice(10.0));
     }
+
 
     /**
      * Task 5
@@ -159,16 +160,14 @@ public class InheritancePractice {
      * Difficulty: 2
      */
 
-    public void createPizzeriaManager(){
-        PizzeriaManager pizzeriaManager = new PizzeriaManager();
-        Order order = new Order();
-        Pizza standardPizza = new Pizza("Margherita");
-        order.addMenuItem(standardPizza);
-        Durum classicDurum = new Durum("classic", "kebab");
-        order.addMenuItem(classicDurum);
-        pizzeriaManager.calculateTotalPrice(order);
-        pizzeriaManager.printReceipt(order);
-
+    public void checkTotalPriceWithFamilyPizza() {
+        Pizza pizza1 = new Pizza("Palermo", "regular");
+        Pizza pizza2 = new Pizza("Greek", "family");
+        OrderManager orderManager = new OrderManager();
+        orderManager.addMenuItem(pizza1);
+        orderManager.addMenuItem(pizza2);
+        orderManager.printMenuItems();
+        System.out.println("Total price: " +orderManager.calculateTotalPrice());
     }
 }
 /**
