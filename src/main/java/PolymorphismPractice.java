@@ -27,18 +27,18 @@
 
 public class PolymorphismPractice {
     public static void main(String[] args) {
-        PolymorphismPractice op = new PolymorphismPractice();
-        System.out.println("Task 1: "); op.getMenuItemInfo();
-        System.out.println("Task 2: "); op.makePizzaAndDurum();
-        System.out.println("Task 3: "); op.checkOrderManager();
-        System.out.println("Task 4: "); op.checkDurumDiscount();
-        System.out.println("Task 5: "); op.checkTotalPriceWithFamilyPizza();
+       // PolymorphismPractice op = new PolymorphismPractice();
+       // System.out.println("Task 1: "); op.getMenuItemInfo();
+       // System.out.println("Task 2: "); op.makePizzaAndDurum();
+       // System.out.println("Task 3: "); op.checkOrderManager();
+       // System.out.println("Task 4: "); op.checkDurumDiscount();
+       // System.out.println("Task 5: "); op.checkTotalPriceWithFamilyPizza();
     }
 
     /**
      * Task 1
      * In this task we will create the  MenuItem class (see the UML diagram for reference)
-     * The MenuItem class will be slightly different than last time,
+     * The MenuItem class will be slightly different from last time,
      * it needs to have only one private attribute price(double).
      * The class also needs a constructor that uses a double price parameter.
      * This price attribute needs a getter method.
@@ -52,10 +52,13 @@ public class PolymorphismPractice {
      * Difficulty: 2
      */
 
+    /*
     public void getMenuItemInfo() {
         MenuItem menuItem1 = new MenuItem(50.0);
         System.out.println("MenuItem: " + menuItem1);
     }
+
+     */
 
     /**
      * Task 2
@@ -79,13 +82,15 @@ public class PolymorphismPractice {
      * Difficulty: 2
      */
 
-
+/*
     public void makePizzaAndDurum() {
         Pizza hawaiiPizza = new Pizza("Hawaii", "regular");
         System.out.println("Pizza: " + hawaiiPizza);
         Durum classicDurum = new Durum("classic", "kebab");
         System.out.println("Durum: " + classicDurum);
     }
+
+ */
 
     /**
      * Task 3
@@ -105,6 +110,7 @@ public class PolymorphismPractice {
      * New skills: polymorphism and ArrayList<>
      * Difficulty: 3
      */
+    /*
     public void checkOrderManager() {
         // Task 3
         OrderManager orderManager = new OrderManager();
@@ -112,6 +118,8 @@ public class PolymorphismPractice {
         orderManager.addMenuItem(new Durum("Classic Durum", "chicken"));
         orderManager.printMenuItems();
     }
+
+     */
 
 
     /**
@@ -132,6 +140,7 @@ public class PolymorphismPractice {
      * Difficulty: 4
      */
 
+    /*
     public void checkDurumDiscount() {
         OrderManager orderManager = new OrderManager();
         orderManager.addMenuItem(new Pizza("Peperoni", "regular"));
@@ -139,7 +148,7 @@ public class PolymorphismPractice {
         System.out.println("Price before discount: " + orderManager.calculateTotalPrice());
         System.out.println("Price with durum discount: " + orderManager.calculateTotalPrice(10.0));
     }
-
+     */
 
     /**
      * Task 5
@@ -158,7 +167,7 @@ public class PolymorphismPractice {
      * New skills: polymorphism and casting objects
      * Difficulty: 2
      */
-
+/*
     public void checkTotalPriceWithFamilyPizza() {
         Pizza pizza1 = new Pizza("Palermo", "regular");
         Pizza pizza2 = new Pizza("Greek", "family");
@@ -168,6 +177,8 @@ public class PolymorphismPractice {
         orderManager.printMenuItems();
         System.out.println("Total price: " +orderManager.calculateTotalPrice());
     }
+
+ */
 }
 /**
  * @author Maria Hansen
