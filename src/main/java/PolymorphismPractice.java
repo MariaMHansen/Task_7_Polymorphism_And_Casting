@@ -1,15 +1,21 @@
 /*
-   Welcome to assignment seven, ...
-
+   Welcome to assignment seven, where you will practice
+   using inheritance and polymorphism to enhance the pizzeria app
+   that we worked on last time.
 
    ------------------------------------------------------------
    Polymorphism
    -------------------------------------------------------------
-   ...
+   Polymorphism is a feature of object-oriented programming languages
+   that allows objects to have "many forms", through inheritance.
+   For example in a Student class extends Person class, then the
+   Student class object is also an instance of a Person.
+   Polymorphism is often used in programming for creating generic parent classes,
+   for a group of children classes and accessing methods of different objects
+   related by inheritance through casting.
 
-   In this exercise, you will practice using Polymorphism to ......
-   We will continue working on the pizzeria application and
-   add we have a new product on the menu, it is durum!
+   In this exercise, you will practice using Polymorphism to create discounts
+   and additional fees for the pizzeria price calculating application.
    Scroll down to STEP 1:
    */
 
@@ -17,74 +23,59 @@
  * This is the Main method,
  * Uncomment the lines of code for each method you implement
  * to test your solution.
- *
- * Links
- * 11.3 Using the super Keyword
- * 11.3.1 Calling Superclass Constructors
- * 11.3.3 Calling Superclass Methods
- * The keyword super can also be used to reference a method other than the constructor in the
- * superclass. The syntax is super.method(arguments);
- * 11.4 Overriding Methods
- *
  */
 
 public class PolymorphismPractice {
     public static void main(String[] args) {
         PolymorphismPractice op = new PolymorphismPractice();
-        System.out.println("Task 1: ");
-        op.getMenuItemInfo();
-        System.out.println("Task 2: ");
-        op.makePizzaAndDurum();
-        System.out.println("Task 3: ");
-        op.checkOrderManager();
-        System.out.println("Task 4: ");
-        op.checkDurumDiscount();
+        System.out.println("Task 1: "); op.getMenuItemInfo();
+        System.out.println("Task 2: "); op.makePizzaAndDurum();
+        System.out.println("Task 3: "); op.checkOrderManager();
+        System.out.println("Task 4: "); op.checkDurumDiscount();
         System.out.println("Task 5: "); op.checkTotalPriceWithFamilyPizza();
     }
 
     /**
      * Task 1
-     * <p>
-     * In this task we will make a MenuItem class (see the UML diagram for reference)
-     * The MenuItem class needs to have number(int), price(double) and type(String) attributes.
-     * The possible types, that will be used for MenuItem objects are: pizza and durum.
-     * All attributes must be private, and have getter methods.
-     * The class also needs a constructor that uses String type and double price parameters.
-     * Inside the constructor the number attribute, which represents the number of the food item
-     * on the Menu card, has to be a random whole number from 1 to 100.
-     * Finally, create a toString method to display your MenuItems nicely then they are printed out.
+     * In this task we will create the  MenuItem class (see the UML diagram for reference)
+     * The MenuItem class will be slightly different than last time,
+     * it needs to have only one private attribute price(double).
+     * The class also needs a constructor that uses a double price parameter.
+     * This price attribute needs a getter method.
+     * The class also needs a toString method for
+     * displaying the MenuItems nicely for testing your solution.
      * You can choose a format you like, or you can use this one:
-     * return " number: " +getNumber()+ " type: " + getType() +" price: "+ getPrice();
+     * return " price: "+ getPrice();
      * Note! The toString() method must return a String, not just System.out.print it
-     * Tip! Use Random class for the number variable
      * Points: 2
-     * New skills: using Random class in constructor, toString()
+     * New skills: revision attributes and constructors
      * Difficulty: 2
      */
 
     public void getMenuItemInfo() {
         MenuItem menuItem1 = new MenuItem(50.0);
         System.out.println("MenuItem: " + menuItem1);
-
     }
 
     /**
      * Task 2
      * Our pizzeria will be making two types of MenuItems,
-     * one of them will be pizza, for this we need a Pizza class.
-     * Therefore, we need to create a Pizza class that is a child class
-     * the MenuItem parent class.
-     * Use the UML diagram provided in the UML folder to create pizza name and ingredients attributes.
+     * pizzas and durum, for this we will need to create
+     * two classes Pizza and Durum, they will be much like
+     * in the previous task, but a bit modified.
+     * Pizza and Durum classes must be implemented as children classes
+     * to the MenuItem parent class.
+     * Use the UML diagram provided in the UML folder to see pizza and durum attributes.
      * Remember to make all attributes private and create getters.
-     * Create a constructor, so we can make Pizza objects in later steps.
-     * Since, Pizza class has an inheritance relation to MenuItem class,
-     * it will need to send the type and price parameters to the super class in the constructor.
-     * All pizzas cost 87.0. Pizza class needs to send "pizza" type to the MenuItem superclass.
-     * You also need to create a toStringMethod, which Overrides the toStringMethod of the super class.
-     * You can find examples of overriding toString method here : 11.4 Overriding Methods
-     * Tip! Super keyword MUST always be in the first line of the constructor!
+     * Create the constructors, as instructed.
+     * Since, Pizza and Durum classes have an inheritance relation to MenuItem class,
+     * they will need to send the price parameter to the super class in the constructor.
+     * All pizzas cost 87.0 and all durum cost 65.0
+     * For simplicity, all pizzas have the following ingredients {"crust","cheese","toppings"}.
+     * You also need to create a toStringMethod, to print out your items nicely.
+     * You can use the previous Task_6_Inheritance_And_Overriding as an example
      * Points: 2
-     * New skills: overriding methods, super keyword
+     * New skills: repetition of inheritance
      * Difficulty: 2
      */
 
@@ -98,19 +89,20 @@ public class PolymorphismPractice {
 
     /**
      * Task 3
-     * The second type of MenuItems the pizzeria will produce is Durum.
-     * Therefore, we need to create a Durum class that is a child class
-     * the MenuItem parent class.
-     * Use the UML diagram provided in the UML folder to create Durum name and meat attributes.
-     * Remember to make all attributes private and create getters.
-     * Create a constructor, so we can make Durum objects in later steps.
-     * Since, Durum class has an inheritance relation to MenuItem class,
-     * it will need to send the type and price parameters to the super class in the constructor.
-     * All durum cost 65.0. Durum class needs to send "durum" type to the MenuItem superclass.
-     * You also need to create a toStringMethod, which Overrides the toStringMethod of the super class.
-     * You can find examples of overriding toString method here : 11.4 Overriding Methods
+     * In this step we will create an OrderManager class,
+     * with one private attribute, which is an ArrayList of MenuItems.
+     * Using this data structure instead of an array, like we did last
+     * time, will make it easier to add and remove items from the list,
+     * because ArrayLists have a dynamically changing size, and some
+     * useful methods, such as add and remove are pre-implemented.
+     * Try to use the .add method to implement the addMenuItem method
+     * You can find an example here:
+     * "Introduction to Java Programming and Data Structures book"
+     * Inheritance and Polymorphism, Listing 11.8 TestArrayList.java
+     * You will also need to create an empty constructor a getter and a toString method.
+     * See the UML diagram for more details.
      * Points: 3
-     * New skills: overriding methods, super keyword
+     * New skills: polymorphism and ArrayList<>
      * Difficulty: 3
      */
     public void checkOrderManager() {
@@ -124,22 +116,23 @@ public class PolymorphismPractice {
 
     /**
      * Task 4
-     * Create an Order class, with one attribute, which is
-     * an array of MenuItems in this order.
-     * You also need to create an empty constructor for this class,
-     * which creates a new MenuItem[] for each order and sets it to 10 places.
-     * Your Order class needs to have two methods one for adding a new MenuItem to
-     * the MenuItems array, and another for printing the menuItems from this array (in the format you like)
-     * See the UML diagram provided in the UML folder to see attribute types.
-     * Remember private visibility attributes.
-     * Create a getter for the pizzas attribute.
+     * In this task we will learn to use polymorphism to check
+     * if a MenuItem in the menuItems ArrayList<> is a
+     * Pizza or a Durum class object. We will use overloading,
+     * to implement calculating the discount price, like we did in
+     * Task_5_Visibility_And_Overloading
+     * Implement the calculateTotalPrice(double durumDiscount)
+     * in a way that it would iterate through all items in the
+     * menuItems ArrayList<> using a for or a for each loop,
+     * and sum them up to a total price.
+     * Check for each item if it is a Durum, if so
+     * subtract the discount from total price.
      * Points: 3
-     * New skills: storing children items in parent class array
+     * New skills: polymorphism and instanceof
      * Difficulty: 4
      */
 
     public void checkDurumDiscount() {
-        // Task 3
         OrderManager orderManager = new OrderManager();
         orderManager.addMenuItem(new Pizza("Peperoni", "regular"));
         orderManager.addMenuItem(new Durum("Classic Durum", "chicken"));
@@ -150,13 +143,19 @@ public class PolymorphismPractice {
 
     /**
      * Task 5
-     * Create a PizzeriaManager class, with no attributes and an empty constructor.
-     * See the UML diagram provided in the UML folder to see attribute types.
-     * This class needs to have two methods one for
-     * calculating the total price of all pizzas in an order.
-     * You can also make a method that prints out the receipt with all pizzas and total price just for fun (no test)
+     * Finally, we will add additional functionality to OrderManager
+     * calculateTotalPrice() method.
+     * The pizzas in out system now have a size attribute,
+     * which can be "regular" or "family"
+     * Add additional functionality to the method,
+     * so that while it is looping through the menuItems
+     * to calculate the total price it also checks if the
+     * menu item is a Pizza. If so the item gets casted to
+     * a Pizza object to check the type attribute.
+     * If the type is "family" extra 100.0 is added to total price.
+     * Hint! Use the exact String "family" as size for the tests to pass
      * Points: 2
-     * New skills: accessing class attributes through inheritance
+     * New skills: polymorphism and casting objects
      * Difficulty: 2
      */
 
