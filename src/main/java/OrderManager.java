@@ -26,8 +26,6 @@ public class OrderManager {
         return totalPrice;
         }
 
-
-
     public double calculateTotalPrice(double durumDiscount){
         double totalPrice = 0.0;
         for (MenuItem menuItem : this.getMenuItems()){
@@ -38,7 +36,6 @@ public class OrderManager {
         }
         return totalPrice;
     }
-
 
     public void printMenuItems(){
         for (MenuItem menuItem : menuItems) {

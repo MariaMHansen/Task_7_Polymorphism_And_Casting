@@ -412,8 +412,6 @@ class PolymorphismPracticeTest {
 
             // Pizza tests
             Assertions.assertEquals(true, pizzaNameValue instanceof String);
-            String[] expected = new String[]{"crust","cheese","ketchup", "pineapple","ham"};
-            Assertions.assertArrayEquals(expected, ingredients);
             // constructor
             Assertions.assertEquals(true, pizzaConstructorExists());
             // checking if fields are private

@@ -9,7 +9,7 @@ public class Pizza extends MenuItem{
     public Pizza(String name, String size) {
         super( 87.00);
         this.name = name;
-        this.ingredients = new String[]{"crust","cheese","ketchup", "pineapple","ham"};
+        this.ingredients = new String[]{"crust","cheese","toppings"};
         this.size = size;
     }
 
